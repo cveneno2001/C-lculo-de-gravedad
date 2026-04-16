@@ -1,0 +1,66 @@
+REPORTE DE PROYECTO: INSTRUMENTACION DIGITAL DEL
+MOVIMIENTO ARMONICO SIMPLE
+
+INTRODUCCION
+El presente reporte detalla el diseño y la implementacion de
+un sistema de adquisicion de datos automatizado para el estudio del Movimiento Armonico
+Simple (MAS) en un pendulo fisico. El proyecto utiliza un microcontrolador
+ESP32 junto con un sensor laser de precision para registrar el desplazamiento
+de la masa en tiempo real. El objetivo es minimizar el error sistematico
+introducido por la medicion manual y obtener una caracterizacion precisa de la aceleracion
+de la gravedad mediante el analisis de la frecuencia de oscilacion.
+
+MARCO TEORICO
+El Movimiento armonico Simple es un modelo matematico que
+describe sistemas donde la fuerza restauradora es directamente proporcional al
+desplazamiento. En un pendulo simple, para angulos pequeños, la componente
+tangencial de la gravedad genera una aceleracion proporcional al angulo de desviacion.
+
+Ecuacion Diferencial del Movimiento:
+La ley de Newton para este sistema se expresa como:
+(d^2 theta / dt^2) + (g / L) * sen(theta) = 0
+
+Solucion General de la Posicion:
+La posicion angular o lineal en funcion del tiempo sigue una
+curva senoidal definida por:
+x(t) = A * cos(w * t + phi)
+
+Relacion del Periodo y la Gravedad:
+El periodo (T), definido como el tiempo en completar un
+ciclo, depende de la longitud del hilo (L) y la gravedad (g). Para facilitar el
+calculo de la gravedad, se utiliza la forma linealizada de la ecuacion del
+periodo:
+T^2 = (4 * pi^2 / g) * L
+
+Frecuencia Angular:
+La relacion entre la frecuencia angular medida por el sensor
+y el periodo es:
+w = 2 * pi / T
+
+En este experimento, el sensor mide la distancia lineal (x) milimetrica.
+Al graficar estos datos, se puede extraer el periodo experimental y, por
+consecuencia, el valor de la gravedad local.
+
+LISTA DE MATERIALES
+
+Material | Descripcion tecnica | Funcion en el Proyecto
+ESP32 DevKit V1 | Microcontrolador con soporte I2C y USB-Serial | Cerebro del sistema y envio de datos a la PC
+Sensor VL53L0X | Sensor laser de distancia (Time-of-Flight) | Medicion de la posicion de la masa en mm
+Cable USB | Cable de datos Micro-USB | Alimentacion y comunicacion serial con Python
+Protoboard | Placa de pruebas para circuitos | Conexion sin soldadura de los componentes
+Jumpers | Cables de conexion tipo Dupont | Puentes de conexion entre sensor y ESP32
+Masa Puntual | Esfera de color claro o superficie plana | Objeto que oscila y refleja el haz laser
+Hilo Inelastico | Nylon o hilo de pesca | Define la longitud L del pendulo sin estirarse
+Soporte Fijo | Base rigida o tripode | Punto de pivote para evitar vibraciones externas
+
+METODOLOGIA DE ANALISIS
+
+Se calibra el sensor para detectar el centro de oscilacion de la masa.
+
+Se inicia la captura de datos a traves del script de Python para visualizar la onda.
+
+Se miden al menos 10 oscilaciones completas para promediar el periodo.
+
+Se registra la longitud L desde el punto de pivote hasta el centro de masa.
+
+Se aplica el despeje de la gravedad en la formula del periodo para validar los resultados.
